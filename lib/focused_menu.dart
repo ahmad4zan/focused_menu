@@ -180,8 +180,8 @@ class FocusedMenuDetails extends StatelessWidget {
                         height: childSize!.height,
                         child: child))),
             Positioned(
-              top: topOffset,
-              left: leftOffset,
+              top: 0,
+              left: 0,
               child: TweenAnimationBuilder(
                 duration: Duration(milliseconds: 200),
                 builder: (BuildContext context, dynamic value, Widget? child) {
