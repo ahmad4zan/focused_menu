@@ -145,13 +145,20 @@ class FocusedMenuDetails extends StatelessWidget {
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
     final menuHeight = listHeight < maxMenuHeight ? listHeight : maxMenuHeight;
-    final leftOffset = (childOffset.dx + maxMenuWidth) < size.width
+    var leftOffset = (childOffset.dx + maxMenuWidth) < size.width
         ? childOffset.dx
         : (childOffset.dx - maxMenuWidth + childSize!.width);
-    final topOffset = (childOffset.dy + menuHeight + childSize!.height) <
+    var topOffset = (childOffset.dy + menuHeight + childSize!.height) <
             size.height - bottomOffsetHeight!
         ? childOffset.dy + childSize!.height + menuOffset!
         : childOffset.dy - menuHeight - menuOffset!;
+
+    if (leftOffset < 10) {
+      leftOffset = 100;
+    }
+    if (topOffset < 10) {
+      topOffset = 100;
+    }
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
@@ -180,8 +187,8 @@ class FocusedMenuDetails extends StatelessWidget {
                         height: childSize!.height,
                         child: child))),
             Positioned(
-              top: 0,
-              left: 0,
+              top: topOffset,
+              left: leftOffset,
               child: TweenAnimationBuilder(
                 duration: Duration(milliseconds: 200),
                 builder: (BuildContext context, dynamic value, Widget? child) {
