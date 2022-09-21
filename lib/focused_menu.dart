@@ -161,8 +161,6 @@ class FocusedMenuDetails extends StatelessWidget {
     }
     return Scaffold(
       backgroundColor: Colors.transparent,
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.thumb_up)),
       body: Container(
         child: Stack(
           fit: StackFit.expand,
