@@ -141,10 +141,10 @@ class FocusedMenuDetails extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     final maxMenuHeight = size.height * 0.35;
-    final listHeight = menuItems.length * (itemExtent ?? 50.0);
+    var listHeight = menuItems.length * (itemExtent ?? 50.0);
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
-    final menuHeight = listHeight < maxMenuHeight ? listHeight : maxMenuHeight;
+    var menuHeight = listHeight < maxMenuHeight ? listHeight : maxMenuHeight;
     var leftOffset = (childOffset.dx + maxMenuWidth) < size.width
         ? childOffset.dx
         : (childOffset.dx - maxMenuWidth + childSize!.width);
@@ -201,7 +201,7 @@ class FocusedMenuDetails extends StatelessWidget {
                 tween: Tween(begin: 0.0, end: 1.0),
                 child: Container(
                   width: maxMenuWidth,
-                  //height: menuHeight,
+                  height: menuHeight,
                   decoration: menuBoxDecoration ??
                       BoxDecoration(
                           color: Colors.grey.shade200,
