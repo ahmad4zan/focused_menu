@@ -201,7 +201,7 @@ class FocusedMenuDetails extends StatelessWidget {
                 tween: Tween(begin: 0.0, end: 1.0),
                 child: Container(
                   width: maxMenuWidth,
-                  height: menuHeight,
+                  //height: menuHeight,
                   decoration: menuBoxDecoration ??
                       BoxDecoration(
                           color: Colors.grey.shade200,
