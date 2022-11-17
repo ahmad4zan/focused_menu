@@ -72,13 +72,17 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
         onTap: () async {
           widget.onPressed();
           if (widget.openWithTap) {
-            await openMenu(context);
+            var listHeight =
+                widget.menuItems.length * (widget.menuItemExtent ?? 50.0);
+            await openMenu(context, listHeight: listHeight);
           }
         },
         onLongPress: () async {
           if (!widget.openWithTap) {
             changeList(widget.menuItems);
-            await openMenu(context);
+            var listHeight =
+                widget.menuItems.length * (widget.menuItemExtent ?? 50.0);
+            await openMenu(context, listHeight: listHeight);
           }
         },
         child: widget.child);
@@ -86,10 +90,11 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
   reOpenMenu(List<FocusedMenuItem> newCount) async {
     changeList(newCount);
-    // await openMenu(context);
+    var listHeight = newCount.length * (widget.menuItemExtent ?? 50.0);
+    await openMenu(context, listHeight: listHeight);
   }
 
-  Future openMenu(BuildContext context) async {
+  Future openMenu(BuildContext context, {listHeight}) async {
     getOffset();
     await Navigator.push(
         context,
@@ -112,6 +117,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     animateMenu: widget.animateMenuItems ?? true,
                     bottomOffsetHeight: widget.bottomOffsetHeight ?? 0,
                     menuOffset: widget.menuOffset ?? 0,
+                    listHeight: listHeight,
                     reOpenMenu: reOpenMenu,
                   ));
             },
@@ -134,6 +140,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final double? bottomOffsetHeight;
   final double? menuOffset;
   final Function? reOpenMenu;
+  final listHeight;
 
   FocusedMenuDetails(
       {Key? key,
@@ -148,6 +155,7 @@ class FocusedMenuDetails extends StatelessWidget {
       required this.blurBackgroundColor,
       required this.menuWidth,
       this.bottomOffsetHeight,
+      this.listHeight,
       this.reOpenMenu,
       this.menuOffset})
       : super(key: key);
@@ -157,7 +165,6 @@ class FocusedMenuDetails extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     final maxMenuHeight = size.height * 0.35;
-    var listHeight = menuItems.length * (itemExtent ?? 50.0);
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
     var menuHeight = listHeight < maxMenuHeight ? listHeight : maxMenuHeight;
