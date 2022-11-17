@@ -278,6 +278,7 @@ class FocusedMenuDetails extends StatelessWidget {
                                     setState(() {
                                       menuItems = chunks[pos];
                                     });
+                                  Navigator.pop(context);
                                   reOpenMenu!(menuItems);
                                 },
                                 title: Text("More..."),
