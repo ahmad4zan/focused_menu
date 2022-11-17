@@ -86,7 +86,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
   reOpenMenu(List<FocusedMenuItem> newCount) async {
     changeList(newCount);
-    await openMenu(context);
+    // await openMenu(context);
   }
 
   Future openMenu(BuildContext context) async {
