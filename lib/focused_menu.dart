@@ -91,7 +91,34 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   reOpenMenu(List<FocusedMenuItem> newCount) async {
     changeList(newCount);
     var listHeight = newCount.length * (widget.menuItemExtent ?? 50.0);
-    await openMenu(context, listHeight: listHeight);
+    Navigator.pop(context);
+    await Navigator.push(
+        context,
+        PageRouteBuilder(
+            transitionDuration: widget.duration ?? Duration(milliseconds: 100),
+            pageBuilder: (context, animation, secondaryAnimation) {
+              animation = Tween(begin: 0.0, end: 1.0).animate(animation);
+              return FadeTransition(
+                  opacity: animation,
+                  child: FocusedMenuDetails(
+                    itemExtent: widget.menuItemExtent,
+                    menuBoxDecoration: widget.menuBoxDecoration,
+                    child: widget.child,
+                    childOffset: childOffset,
+                    childSize: childSize,
+                    menuItems: tempList,
+                    blurSize: widget.blurSize,
+                    menuWidth: widget.menuWidth,
+                    blurBackgroundColor: widget.blurBackgroundColor,
+                    animateMenu: widget.animateMenuItems ?? true,
+                    bottomOffsetHeight: widget.bottomOffsetHeight ?? 0,
+                    menuOffset: widget.menuOffset ?? 0,
+                    listHeight: listHeight,
+                    reOpenMenu: reOpenMenu,
+                  ));
+            },
+            fullscreenDialog: true,
+            opaque: false));
   }
 
   Future openMenu(BuildContext context, {listHeight}) async {
@@ -278,7 +305,6 @@ class FocusedMenuDetails extends StatelessWidget {
                                     setState(() {
                                       menuItems = chunks[pos];
                                     });
-                                  Navigator.pop(context);
                                   reOpenMenu!(menuItems);
                                 },
                                 title: Text("More..."),
