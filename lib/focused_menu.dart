@@ -46,6 +46,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   GlobalKey containerKey = GlobalKey();
   Offset childOffset = Offset(0, 0);
   Size? childSize;
+  List<FocusedMenuItem> tempList = [];
 
   getOffset() {
     RenderBox renderBox =
@@ -55,6 +56,12 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
     setState(() {
       this.childOffset = Offset(offset.dx, offset.dy);
       childSize = size;
+    });
+  }
+
+  changeList(List<FocusedMenuItem> newCount) {
+    setState(() {
+      tempList = newCount;
     });
   }
 
@@ -70,10 +77,16 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
         },
         onLongPress: () async {
           if (!widget.openWithTap) {
+            changeList(widget.menuItems);
             await openMenu(context);
           }
         },
         child: widget.child);
+  }
+
+  reOpenMenu(List<FocusedMenuItem> newCount) async {
+    changeList(newCount);
+    await openMenu(context);
   }
 
   Future openMenu(BuildContext context) async {
@@ -92,13 +105,14 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     child: widget.child,
                     childOffset: childOffset,
                     childSize: childSize,
-                    menuItems: widget.menuItems,
+                    menuItems: tempList,
                     blurSize: widget.blurSize,
                     menuWidth: widget.menuWidth,
                     blurBackgroundColor: widget.blurBackgroundColor,
                     animateMenu: widget.animateMenuItems ?? true,
                     bottomOffsetHeight: widget.bottomOffsetHeight ?? 0,
                     menuOffset: widget.menuOffset ?? 0,
+                    reOpenMenu: reOpenMenu,
                   ));
             },
             fullscreenDialog: true,
@@ -119,6 +133,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final Color? blurBackgroundColor;
   final double? bottomOffsetHeight;
   final double? menuOffset;
+  final Function? reOpenMenu;
 
   FocusedMenuDetails(
       {Key? key,
@@ -133,6 +148,7 @@ class FocusedMenuDetails extends StatelessWidget {
       required this.blurBackgroundColor,
       required this.menuWidth,
       this.bottomOffsetHeight,
+      this.reOpenMenu,
       this.menuOffset})
       : super(key: key);
 
@@ -255,6 +271,7 @@ class FocusedMenuDetails extends StatelessWidget {
                                     setState(() {
                                       menuItems = chunks[pos];
                                     });
+                                  reOpenMenu!(menuItems);
                                 },
                                 title: Text("More..."),
                               );
