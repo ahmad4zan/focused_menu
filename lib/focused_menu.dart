@@ -17,6 +17,7 @@ class FocusedMenuHolder extends StatefulWidget {
   final Color? blurBackgroundColor;
   final double? bottomOffsetHeight;
   final double? menuOffset;
+  final Color? moreTextcolor;
 
   /// Open with tap insted of long press.
   final bool openWithTap;
@@ -35,6 +36,7 @@ class FocusedMenuHolder extends StatefulWidget {
       this.menuWidth,
       this.bottomOffsetHeight,
       this.menuOffset,
+      this.moreTextcolor,
       this.openWithTap = false})
       : super(key: key);
 
@@ -115,6 +117,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     menuOffset: widget.menuOffset ?? 0,
                     listHeight: listHeight,
                     reOpenMenu: reOpenMenu,
+                    moreTextColor: widget.moreTextcolor,
                   ));
             },
             fullscreenDialog: true,
@@ -146,6 +149,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     menuOffset: widget.menuOffset ?? 0,
                     listHeight: listHeight,
                     reOpenMenu: reOpenMenu,
+                    moreTextColor: widget.moreTextcolor,
                   ));
             },
             fullscreenDialog: true,
@@ -167,6 +171,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final double? bottomOffsetHeight;
   final double? menuOffset;
   final Function? reOpenMenu;
+  final Color? moreTextColor;
   final listHeight;
 
   FocusedMenuDetails(
@@ -183,6 +188,7 @@ class FocusedMenuDetails extends StatelessWidget {
       required this.menuWidth,
       this.bottomOffsetHeight,
       this.listHeight,
+      this.moreTextColor,
       this.reOpenMenu,
       this.menuOffset})
       : super(key: key);
@@ -307,7 +313,10 @@ class FocusedMenuDetails extends StatelessWidget {
                                     });
                                   reOpenMenu!(menuItems);
                                 },
-                                title: Text("More..."),
+                                title: Text(
+                                  "More...",
+                                  style: TextStyle(color: this.moreTextColor),
+                                ),
                               );
                             }
                           }
