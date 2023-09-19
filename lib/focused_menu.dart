@@ -18,6 +18,8 @@ class FocusedMenuHolder extends StatefulWidget {
   final double? bottomOffsetHeight;
   final double? menuOffset;
   final Color? moreTextcolor;
+  final int? chunkSize;
+  final double? offsetHeight;
 
   /// Open with tap insted of long press.
   final bool openWithTap;
@@ -37,7 +39,9 @@ class FocusedMenuHolder extends StatefulWidget {
       this.bottomOffsetHeight,
       this.menuOffset,
       this.moreTextcolor,
-      this.openWithTap = false})
+      this.openWithTap = false,
+      this.chunkSize = 5,
+      this.offsetHeight = 0})
       : super(key: key);
 
   @override
@@ -118,6 +122,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     listHeight: listHeight,
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
+                    offset: widget.offsetHeight,
                   ));
             },
             fullscreenDialog: true,
@@ -150,6 +155,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     listHeight: listHeight,
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
+                    lengthSize: widget.chunkSize,
                   ));
             },
             fullscreenDialog: true,
@@ -173,25 +179,29 @@ class FocusedMenuDetails extends StatelessWidget {
   final Function? reOpenMenu;
   final Color? moreTextColor;
   final listHeight;
+  final int? lengthSize;
+  final double? offset;
 
-  FocusedMenuDetails(
-      {Key? key,
-      required this.menuItems,
-      required this.child,
-      required this.childOffset,
-      required this.childSize,
-      required this.menuBoxDecoration,
-      required this.itemExtent,
-      required this.animateMenu,
-      required this.blurSize,
-      required this.blurBackgroundColor,
-      required this.menuWidth,
-      this.bottomOffsetHeight,
-      this.listHeight,
-      this.moreTextColor,
-      this.reOpenMenu,
-      this.menuOffset})
-      : super(key: key);
+  FocusedMenuDetails({
+    Key? key,
+    required this.menuItems,
+    required this.child,
+    required this.childOffset,
+    required this.childSize,
+    required this.menuBoxDecoration,
+    required this.itemExtent,
+    required this.animateMenu,
+    required this.blurSize,
+    required this.blurBackgroundColor,
+    required this.menuWidth,
+    this.bottomOffsetHeight,
+    this.listHeight,
+    this.moreTextColor,
+    this.reOpenMenu,
+    this.menuOffset,
+    this.lengthSize,
+    this.offset = 0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -200,7 +210,8 @@ class FocusedMenuDetails extends StatelessWidget {
     final maxMenuHeight = size.height * 0.35;
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
-    var menuHeight = listHeight < maxMenuHeight ? listHeight : maxMenuHeight;
+    var menuHeight =
+        listHeight < maxMenuHeight ? listHeight : maxMenuHeight + offset!;
     var leftOffset = (childOffset.dx + maxMenuWidth) < size.width
         ? childOffset.dx
         : (childOffset.dx - maxMenuWidth + childSize!.width);
@@ -274,9 +285,9 @@ class FocusedMenuDetails extends StatelessWidget {
                     child: StatefulBuilder(builder: (context, setState) {
                       var chunks = [];
                       var pos = 0;
-                      int chunkSize = 5;
                       chunks = [];
                       var itemTemp = menuItems;
+                      var chunkSize = lengthSize!;
                       for (var i = 0; i < menuItems.length; i += chunkSize) {
                         setState(() {
                           chunks.add(menuItems.sublist(
