@@ -40,7 +40,7 @@ class FocusedMenuHolder extends StatefulWidget {
       this.menuOffset,
       this.moreTextcolor,
       this.openWithTap = false,
-      this.chunkSize = 5,
+      this.chunkSize = 4,
       this.offsetHeight = 0})
       : super(key: key);
 
@@ -199,7 +199,7 @@ class FocusedMenuDetails extends StatelessWidget {
     this.moreTextColor,
     this.reOpenMenu,
     this.menuOffset,
-    this.lengthSize,
+    this.lengthSize = 4,
     this.offset = 0,
   }) : super(key: key);
 
