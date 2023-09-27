@@ -20,6 +20,7 @@ class FocusedMenuHolder extends StatefulWidget {
   final Color? moreTextcolor;
   final int? chunkSize;
   final double? offsetHeight;
+  final double customMaxHeight;
 
   /// Open with tap insted of long press.
   final bool openWithTap;
@@ -41,7 +42,8 @@ class FocusedMenuHolder extends StatefulWidget {
       this.moreTextcolor,
       this.openWithTap = false,
       this.chunkSize = 4,
-      this.offsetHeight = 0})
+      this.offsetHeight = 0,
+      this.customMaxHeight = 0.35})
       : super(key: key);
 
   @override
@@ -123,6 +125,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
                     offset: widget.offsetHeight,
+                    customMaxHeight: widget.customMAxHeight,
                   ));
             },
             fullscreenDialog: true,
@@ -156,6 +159,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
                     lengthSize: widget.chunkSize,
+                    customMaxHeight: widget.customMAxHeight,
                   ));
             },
             fullscreenDialog: true,
@@ -181,6 +185,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final listHeight;
   final int? lengthSize;
   final double? offset;
+  final double customMaxHeight;
 
   FocusedMenuDetails({
     Key? key,
@@ -201,13 +206,14 @@ class FocusedMenuDetails extends StatelessWidget {
     this.menuOffset,
     this.lengthSize = 4,
     this.offset = 0,
+    this.customMaxHeight = 0.35,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    final maxMenuHeight = size.height * 0.5;
+    final maxMenuHeight = size.height * this.customMaxHeight;
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
     var menuHeight =
