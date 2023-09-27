@@ -125,7 +125,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
                     offset: widget.offsetHeight,
-                    customMaxHeight: widget.customMAxHeight,
+                    customMaxHeight: widget.customMaxHeight,
                   ));
             },
             fullscreenDialog: true,
@@ -159,7 +159,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     reOpenMenu: reOpenMenu,
                     moreTextColor: widget.moreTextcolor,
                     lengthSize: widget.chunkSize,
-                    customMaxHeight: widget.customMAxHeight,
+                    customMaxHeight: widget.customMaxHeight,
                   ));
             },
             fullscreenDialog: true,
