@@ -360,7 +360,7 @@ class FocusedMenuDetails extends StatelessWidget {
                                         vertical: 8.0, horizontal: 14),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.start,
                                       children: <Widget>[
                                         if (item.leadingIcon != null) ...[
                                           item.leadingIcon!
