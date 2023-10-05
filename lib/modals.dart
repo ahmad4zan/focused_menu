@@ -10,6 +10,7 @@ class FocusedMenuItem {
   FocusedMenuItem(
       {this.backgroundColor,
       required this.title,
+      this.leadingIcon,
       this.trailingIcon,
       required this.onPressed});
 }
