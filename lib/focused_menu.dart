@@ -191,29 +191,31 @@ class FocusedMenuDetails extends StatelessWidget {
   final double? offset;
   final double customMaxHeight;
   final EdgeInsets padding;
+  final double? customHeight;
 
-  FocusedMenuDetails({
-    Key? key,
-    required this.menuItems,
-    required this.child,
-    required this.childOffset,
-    required this.childSize,
-    required this.menuBoxDecoration,
-    required this.itemExtent,
-    required this.animateMenu,
-    required this.blurSize,
-    required this.blurBackgroundColor,
-    required this.menuWidth,
-    this.bottomOffsetHeight,
-    this.listHeight,
-    this.moreTextColor,
-    this.reOpenMenu,
-    this.menuOffset,
-    this.lengthSize = 4,
-    this.offset = 0,
-    this.customMaxHeight = 0.35,
-    this.padding = EdgeInsets.zero,
-  }) : super(key: key);
+  FocusedMenuDetails(
+      {Key? key,
+      required this.menuItems,
+      required this.child,
+      required this.childOffset,
+      required this.childSize,
+      required this.menuBoxDecoration,
+      required this.itemExtent,
+      required this.animateMenu,
+      required this.blurSize,
+      required this.blurBackgroundColor,
+      required this.menuWidth,
+      this.bottomOffsetHeight,
+      this.listHeight,
+      this.moreTextColor,
+      this.reOpenMenu,
+      this.menuOffset,
+      this.lengthSize = 4,
+      this.offset = 0,
+      this.customMaxHeight = 0.35,
+      this.padding = EdgeInsets.zero,
+      this.customHeight = 0.0})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -222,8 +224,9 @@ class FocusedMenuDetails extends StatelessWidget {
     final maxMenuHeight = size.height * this.customMaxHeight;
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
-    var menuHeight =
-        listHeight < maxMenuHeight ? listHeight : maxMenuHeight + offset!;
+    var menuHeight = listHeight < maxMenuHeight
+        ? listHeight + this.customHeight
+        : maxMenuHeight + offset!;
     var leftOffset = (childOffset.dx + maxMenuWidth) < size.width
         ? childOffset.dx
         : (childOffset.dx - maxMenuWidth + childSize!.width);
