@@ -4,6 +4,7 @@ class FocusedMenuItem {
   Color? backgroundColor;
   Widget title;
   Widget? trailingIcon;
+  Widget? leadingIcon;
   Function onPressed;
 
   FocusedMenuItem(
