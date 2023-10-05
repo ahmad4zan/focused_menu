@@ -21,6 +21,7 @@ class FocusedMenuHolder extends StatefulWidget {
   final int? chunkSize;
   final double? offsetHeight;
   final double customMaxHeight;
+  final double? customHeight;
   final EdgeInsets padding;
 
   /// Open with tap insted of long press.
@@ -45,6 +46,7 @@ class FocusedMenuHolder extends StatefulWidget {
       this.chunkSize = 4,
       this.offsetHeight = 0,
       this.padding = EdgeInsets.zero,
+      this.customHeight = 0.0,
       this.customMaxHeight = 0.35})
       : super(key: key);
 
@@ -129,6 +131,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     offset: widget.offsetHeight,
                     customMaxHeight: widget.customMaxHeight,
                     padding: widget.padding,
+                    customHeight: widget.customHeight,
                   ));
             },
             fullscreenDialog: true,
@@ -164,6 +167,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     lengthSize: widget.chunkSize,
                     customMaxHeight: widget.customMaxHeight,
                     padding: widget.padding,
+                    customHeight: widget.customHeight,
                   ));
             },
             fullscreenDialog: true,
