@@ -21,6 +21,7 @@ class FocusedMenuHolder extends StatefulWidget {
   final int? chunkSize;
   final double? offsetHeight;
   final double customMaxHeight;
+  final EdgeInsets padding;
 
   /// Open with tap insted of long press.
   final bool openWithTap;
@@ -43,6 +44,7 @@ class FocusedMenuHolder extends StatefulWidget {
       this.openWithTap = false,
       this.chunkSize = 4,
       this.offsetHeight = 0,
+      this.padding = EdgeInsets.zero,
       this.customMaxHeight = 0.35})
       : super(key: key);
 
@@ -126,6 +128,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     moreTextColor: widget.moreTextcolor,
                     offset: widget.offsetHeight,
                     customMaxHeight: widget.customMaxHeight,
+                    padding: widget.padding,
                   ));
             },
             fullscreenDialog: true,
@@ -160,6 +163,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     moreTextColor: widget.moreTextcolor,
                     lengthSize: widget.chunkSize,
                     customMaxHeight: widget.customMaxHeight,
+                    padding: widget.padding,
                   ));
             },
             fullscreenDialog: true,
@@ -186,6 +190,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final int? lengthSize;
   final double? offset;
   final double customMaxHeight;
+  final EdgeInsets padding;
 
   FocusedMenuDetails({
     Key? key,
@@ -207,6 +212,7 @@ class FocusedMenuDetails extends StatelessWidget {
     this.lengthSize = 4,
     this.offset = 0,
     this.customMaxHeight = 0.35,
+    this.padding = EdgeInsets.zero,
   }) : super(key: key);
 
   @override
@@ -305,7 +311,7 @@ class FocusedMenuDetails extends StatelessWidget {
                       }
                       return ListView.builder(
                         itemCount: chunks[pos].length + 1,
-                        padding: EdgeInsets.zero,
+                        padding: padding,
                         physics: BouncingScrollPhysics(),
                         itemBuilder: (context, index) {
                           if (index == chunks[pos].length) {
