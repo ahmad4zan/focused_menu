@@ -324,7 +324,28 @@ class FocusedMenuDetails extends StatelessWidget {
                           if (index == chunks[pos].length) {
                             if (menuItems.length <= chunkSize &&
                                 itemTemp.length <= chunkSize) {
-                              return SizedBox(height: 0);
+                              return ListTile(
+                                onTap: () {
+                                  setState(() {
+                                    pos++;
+                                  });
+
+                                  if (pos > chunks.length - 1)
+                                    setState(() {
+                                      pos = 0;
+                                      menuItems = itemTemp;
+                                    });
+                                  else
+                                    setState(() {
+                                      menuItems = chunks[pos];
+                                    });
+                                  reOpenMenu!(menuItems);
+                                },
+                                title: Text(
+                                  "More...",
+                                  style: TextStyle(color: this.moreTextColor),
+                                ),
+                              );
                             } else {
                               return ListTile(
                                 onTap: () {
