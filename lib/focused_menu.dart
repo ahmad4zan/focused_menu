@@ -306,7 +306,7 @@ class FocusedMenuDetails extends StatelessWidget {
                       var pos = 0;
                       chunks = [];
                       var itemTemp = menuItems;
-                      var chunkSize = lengthSize! + 1;
+                      var chunkSize = lengthSize!;
                       for (var i = 0; i < menuItems.length; i += chunkSize) {
                         setState(() {
                           chunks.add(menuItems.sublist(
