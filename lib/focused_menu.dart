@@ -74,6 +74,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
   changeList(List<FocusedMenuItem> newCount) {
     setState(() {
+      prevList = tempList;
       tempList = newCount;
     });
   }
