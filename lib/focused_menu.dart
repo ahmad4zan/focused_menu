@@ -306,7 +306,7 @@ class FocusedMenuDetails extends StatelessWidget {
                       var pos = 0;
                       chunks = [];
                       var itemTemp = menuItems;
-                      var chunkSize = lengthSize!;
+                      var chunkSize = lengthSize! + 1;
                       for (var i = 0; i < menuItems.length; i += chunkSize) {
                         setState(() {
                           chunks.add(menuItems.sublist(
@@ -327,10 +327,10 @@ class FocusedMenuDetails extends StatelessWidget {
                               return ListTile(
                                 onTap: () {
                                   setState(() {
-                                    pos++;
+                                    pos--;
                                   });
 
-                                  if (pos > chunks.length - 1)
+                                  if (pos < 0)
                                     setState(() {
                                       pos = 0;
                                       menuItems = itemTemp;
