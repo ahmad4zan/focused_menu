@@ -305,6 +305,7 @@ class FocusedMenuDetails extends StatelessWidget {
                       var chunks = [];
                       var pos = 0;
                       chunks = [];
+                      var prevItem;
                       var itemTemp = menuItems;
                       var chunkSize = lengthSize!;
                       for (var i = 0; i < menuItems.length; i += chunkSize) {
@@ -333,7 +334,7 @@ class FocusedMenuDetails extends StatelessWidget {
                                   if (pos < 0)
                                     setState(() {
                                       pos = 0;
-                                      menuItems = itemTemp;
+                                      menuItems = prevItem;
                                     });
                                   else
                                     setState(() {
@@ -352,7 +353,7 @@ class FocusedMenuDetails extends StatelessWidget {
                                   setState(() {
                                     pos++;
                                   });
-
+                                  prevItem = menuItems;
                                   if (pos > chunks.length - 1)
                                     setState(() {
                                       pos = 0;
