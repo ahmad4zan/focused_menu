@@ -59,6 +59,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   Offset childOffset = Offset(0, 0);
   Size? childSize;
   List<FocusedMenuItem> tempList = [];
+  List<FocusedMenuItem> prevList = [];
 
   getOffset() {
     RenderBox renderBox =
@@ -119,6 +120,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     childOffset: childOffset,
                     childSize: childSize,
                     menuItems: tempList,
+                    prevItems: prevList,
                     blurSize: widget.blurSize,
                     menuWidth: widget.menuWidth,
                     blurBackgroundColor: widget.blurBackgroundColor,
@@ -155,6 +157,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                     childOffset: childOffset,
                     childSize: childSize,
                     menuItems: tempList,
+                    prevItems: [],
                     blurSize: widget.blurSize,
                     menuWidth: widget.menuWidth,
                     blurBackgroundColor: widget.blurBackgroundColor,
@@ -177,6 +180,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
 class FocusedMenuDetails extends StatelessWidget {
   List<FocusedMenuItem> menuItems;
+  List<FocusedMenuItem> prevItems;
   final BoxDecoration? menuBoxDecoration;
   final Offset childOffset;
   final double? itemExtent;
@@ -200,6 +204,7 @@ class FocusedMenuDetails extends StatelessWidget {
   FocusedMenuDetails(
       {Key? key,
       required this.menuItems,
+      required this.prevItems,
       required this.child,
       required this.childOffset,
       required this.childSize,
@@ -305,7 +310,7 @@ class FocusedMenuDetails extends StatelessWidget {
                       var chunks = [];
                       var pos = 0;
                       chunks = [];
-                      var prevItem = menuItems;
+                      var prevItem = prevItems;
                       var itemTemp = menuItems;
                       var chunkSize = lengthSize!;
                       for (var i = 0; i < menuItems.length; i += chunkSize) {
