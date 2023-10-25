@@ -239,7 +239,9 @@ class FocusedMenuDetails extends StatelessWidget {
     final maxMenuHeight = size.height * this.customMaxHeight;
 
     final maxMenuWidth = menuWidth ?? (size.width * 0.70);
-    var menuHeight = listHeight + this.customHeight;
+    var menuHeight = listHeight < maxMenuHeight
+        ? listHeight + this.customHeight
+        : maxMenuHeight + offset!;
     var leftOffset = (childOffset.dx + maxMenuWidth) < size.width
         ? childOffset.dx
         : (childOffset.dx - maxMenuWidth + childSize!.width);
