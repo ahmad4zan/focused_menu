@@ -143,6 +143,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
   Future openMenu(BuildContext context, {listHeight}) async {
     getOffset();
+    var listHeight = tempList.length * (widget.menuItemExtent ?? 50.0);
     await Navigator.push(
         context,
         PageRouteBuilder(
