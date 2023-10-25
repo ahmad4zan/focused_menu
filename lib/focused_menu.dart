@@ -73,6 +73,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   }
 
   changeList(List<FocusedMenuItem> newCount) {
+    print('newCount ${newCount.length}');
     setState(() {
       prevList = tempList;
       tempList = newCount;
@@ -88,6 +89,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
           if (widget.openWithTap) {
             var listHeight =
                 widget.menuItems.length * (widget.menuItemExtent ?? 50.0);
+            print('onPressed $listHeight');
             await openMenu(context, listHeight: listHeight);
           }
         },
@@ -96,6 +98,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
             changeList(widget.menuItems);
             var listHeight =
                 widget.menuItems.length * (widget.menuItemExtent ?? 50.0);
+            print('onLongPress $listHeight');
             await openMenu(context, listHeight: listHeight);
           }
         },
@@ -105,6 +108,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   reOpenMenu(List<FocusedMenuItem> newCount) async {
     changeList(newCount);
     var listHeight = newCount.length * (widget.menuItemExtent ?? 50.0);
+    print('reOpenMenu $listHeight');
     Navigator.pop(context);
     await Navigator.push(
         context,
@@ -143,7 +147,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
 
   Future openMenu(BuildContext context, {listHeight}) async {
     getOffset();
-    var listHeight = tempList.length * (widget.menuItemExtent ?? 50.0);
+    print('openMenu $listHeight');
     await Navigator.push(
         context,
         PageRouteBuilder(
@@ -245,6 +249,10 @@ class FocusedMenuDetails extends StatelessWidget {
             size.height - bottomOffsetHeight!
         ? childOffset.dy + childSize!.height + menuOffset!
         : childOffset.dy - menuHeight - menuOffset!;
+
+    print('maxMenuHeight $maxMenuHeight');
+    print('listHeight $listHeight');
+    print('menuHeight $menuHeight');
 
     if (leftOffset < 10) {
       leftOffset = 100;
